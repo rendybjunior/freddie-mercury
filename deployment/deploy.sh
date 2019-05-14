@@ -1,0 +1,1 @@
+gcloud functions deploy handlePrOnFreddieDags --runtime python37 --trigger-http --entry-point handle_pr_freddie_dag

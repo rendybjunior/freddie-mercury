@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <h1>DAG Form</h1>
+    <form action="" method="post" novalidate>
+        {{ form.hidden_tag() }}
+        <table class="center">
+        <tr><td>{{ form.dag_name.label }}</td><td>{{ form.dag_name(size=75) }}</td></tr>
+        <tr><td>{{ form.owner.label }}</td><td>{{ form.owner(size=75) }}</td></tr>
+        <tr><td>{{ form.start_date.label }}</td><td>{{ form.start_date(size=75) }}</td></tr>
+        <tr><td>{{ form.email.label }}</td><td>{{ form.email(size=75) }}</td></tr>
+        <tr><td>{{ form.retries.label }}</td><td>{{ form.retries(size=75) }}</td></tr>
+        <tr><td>{{ form.retry_delay_minutes.label }}</td><td>{{ form.retry_delay_minutes(size=75) }}</td></tr>
+        <tr><td>{{ form.schedule_interval.label }}</td><td>{{ form.schedule_interval(size=75) }}</td></tr>
+        <tr><td>{{ form.tasks.label }}</td><td>{{ form.tasks(size=75) }}</td></tr>
+        <tr><td>{{ form.dependencies.label }}</td><td>{{ form.dependencies(size=75) }}</td></tr>
+        </table>
+        {{ form.submit() }}
+    </form>
+    {% if dag_text %}
+    <p>Saved: {{ dag_text }}</p>
+    {% endif %}
+{% endblock %}

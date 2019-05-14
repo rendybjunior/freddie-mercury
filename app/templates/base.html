@@ -1,0 +1,38 @@
+<!doctype html>
+<html>
+<head>
+    <title>Datastore and Firebase Auth Example</title>
+    <script src="https://www.gstatic.com/firebasejs/6.0.2/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/6.0.2/firebase-auth.js"></script>
+    <script>
+    // My web app's Firebase configuration
+    var firebaseConfig = {
+        apiKey: "xxx",
+        authDomain: "xxx",
+        databaseURL: "xxx",
+        projectId: "xxx",
+        storageBucket: "xxx",
+        messagingSenderId: "xxx",
+        appId: "xxx"
+    };
+    // Initialize Firebase
+    firebase.initializeApp(firebaseConfig);
+    </script>
+    <script src="https://cdn.firebase.com/libs/firebaseui/2.6.2/firebaseui.js"></script>
+    <link type="text/css" rel="stylesheet" href="https://cdn.firebase.com/libs/firebaseui/2.6.2/firebaseui.css">
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+    <link type="text/css" rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <img src="{{ url_for('static', filename='rsz_1rsz_fm.jpg') }}"/>
+    <div id="firebaseui-auth-container"></div>
+    <button id="sign-out" hidden=true>Sign Out</button>
+    <div id="login-info" hidden=true>
+        {% if user_data %}
+        <div>Logged in as {{ user_data['email'] }}</div>
+        <a href="/">Home</a> | <a href="task_form">Create new Task</a> | <a href="dag_form">Create new DAG</a>
+        {% endif %}
+        {% block content %}{% endblock %}
+    </div>
+</body>
+</html>

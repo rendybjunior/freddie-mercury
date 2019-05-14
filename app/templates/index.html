@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <h1>We are the champions, my friends</h1>
+    <h2>And we'll keep on fighting 'til the end</h2>
+
+    <div>
+        {% if user_data %}
+        <h3>Last 10 DAGs</h3>
+        <table class="center">
+            <tr>
+              <th>DAG name</th>
+              <th>Schedule Interval</th> 
+              <th>Tasks</th>
+              <th>Dependencies</th>
+            </tr>
+            {% for dag in dags %}
+            <tr>
+                <td><a href="dag_form?dag_name={{ dag['dag_name'] }}">{{ dag['dag_name'] }}</a></td>
+                <td>{{ dag['schedule_interval'] }}</td>
+                <td>
+                    {% for task in dag['tasks'].split(",") %}
+                    <a href="task_form?task_id={{ task.strip() }}">{{ task.strip() }}</a>, 
+                    {% endfor %}
+                </td>
+                <td>{{ dag['dependencies'] }}</td>
+            </tr>
+            {% endfor %}
+        </table>
+        <h3>Last 10 Tasks</h3>
+        <table class="center">
+            <tr>
+              <th>Task ID</th>
+              <th>Type</th> 
+              <th>Destination Table</th>
+              <th>SQL</th>
+            </tr>
+            {% for task in tasks %}
+            <tr>
+                <td><a href="task_form?task_id={{ task['task_id'] }}">{{ task['task_id'] }}</a></td>
+                <td>{{ task['type'] }}</td>
+                <td>{{ task['destination_table'] }}</td>
+                <td>{{ task['sql'][:30] }}</td>
+            </tr>
+            {% endfor %}
+        </table>
+        {% elif error_message %}
+        <p>Error: {{ error_message }}</p>
+        {% endif %}
+    </div>
+{% endblock %}
